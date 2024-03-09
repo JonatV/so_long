@@ -31,7 +31,6 @@ END		=	\033[0m
 			@${CC} ${CFLAGS} -c $< -o $@
 
 all 	:	${NAME}
-			@clear
 
 ${NAME} :	${OBJS}
 			@${AR}	${NAME} ${OBJS}

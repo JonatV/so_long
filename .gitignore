@@ -3,3 +3,5 @@ token.private
 .vscode
 *.o
 *.a
+*.swp
+so_long

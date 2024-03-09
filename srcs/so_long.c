@@ -6,7 +6,7 @@
 /*   By: ventouse <ventouse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:11:37 by jveirman          #+#    #+#             */
-/*   Updated: 2024/03/09 18:42:25 by ventouse         ###   ########.fr       */
+/*   Updated: 2024/03/09 21:36:38 by ventouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 	}
 	if (map_reading(argv[1], &map_gnl, rc))
 	{
-		the_grid = build_matrix(map_gnl, rc);
+		build_matrix(map_gnl, rc, &the_grid);
 	}
 	printf("%s", map_gnl); // debug
 	printf("rows = [%d]\ncols = [%d]\n", rc[0], rc[1]); // debug
