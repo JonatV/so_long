@@ -1,4 +1,5 @@
+token.private
 .DS_Store
 .vscode
-.o
-.a
+*.o
+*.a
