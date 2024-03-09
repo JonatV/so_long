@@ -3,39 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   maps.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
+/*   By: ventouse <ventouse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:58:44 by jveirman          #+#    #+#             */
-/*   Updated: 2024/03/08 17:02:41 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/03/09 18:52:39 by ventouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int	check_set_data(char *map_to_str, int i)
+static int	check_set_data(char *map_to_str, int i, int *rc)
 {
 	while (map_to_str[i])
 	{
 		if (!is_char_valid(map_to_str[i]))
-			// error_exit()
-		// stopped here, i should decide if it is better to start calculating the collectible, P, C, E, col row, etc 
-		// Or if it is better to create the matrix and checking all the Char and the border if it is wall, if it is rectangle etc
-		// And it's time to thing about the main game struct.
-		// Try to see if it is interresting to have a struct with x and y to load coordinate from the main elements (E,P,C)
+		{
+			printf("Wrong char\n");
+			exit(EXIT_FAILURE); // wip
+		}
 		i++;
 	}
+	rc[0] = 0;
+	rc[1] = -1;
+	i = 0;
+	while (map_to_str[i])
+	{
+		if (map_to_str[i] == '\n')
+		{
+			rc[0]++;
+			if (-1 == rc[1])
+				rc[1] = i;
+		}
+		i++;
+	}
+	return (1);
 }
 
-int	map_reading(char *map_path)
+int	map_reading(char *map_path, char **map_gnl, int *rc)
 {
 	int		fd;
 	int		nbr_bytes;
 	char	*buf;
-	char	*map_to_str;
 	char	*temp;
 	
 	temp = "";
-	map_to_str = ""; //wip, will be initialised in the main structure
+	*map_gnl = "";
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
 		error_exit(1, fd, NULL, NULL);
@@ -47,10 +59,47 @@ int	map_reading(char *map_path)
 	{
 		temp = ft_strjoin(temp, buf);
 		if (!temp)
-			error_exit(3, fd, map_to_str, buf);
-		map_to_str = temp;
+			error_exit(3, fd, *map_gnl, buf);
+		*map_gnl = temp;
 		nbr_bytes = read(fd, buf, 1);
 	}
 	close(fd);
-	return (check_set_data(map_to_str, 0));
+	return (check_set_data(*map_gnl, 0, rc));
+}
+
+static void	fill_requisities(t_er_map *error_map, char *map_gnl, int *rc)
+{
+	int	i;
+
+	i = 0;
+	while (map_gnl[i])
+	{
+		if (map_gnl[i] == 'P')
+			error_map->start++;
+		if (map_gnl[i] == 'E')
+			error_map->exit++;
+		if (map_gnl[i] == 'C')
+			error_map->collect++;
+	}
+	if (rc[0] == rc[1])
+		error_map->wall = true;
+	else if (rc[0] < 3 && rc[1] < 4)
+		error_map->wall = true;
+	else if (rc[0] < 4 && rc[1] < 3)
+		error_map->wall = true;
+	else
+		error_map->wall = false;
+}
+
+void	**build_matrix(char *map_gnl, int *rc)
+{
+	t_er_map	*error_map;
+
+	error_map = malloc (sizeof(t_er_map));
+	error_map->collect = 0;
+	error_map->exit = 0;
+	error_map->start = 0;
+	error_map->wall = false;
+	fill_requisities(error_map, map_gnl, rc);
+	//alloc_matrix();
 }

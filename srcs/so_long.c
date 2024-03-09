@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
+/*   By: ventouse <ventouse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:11:37 by jveirman          #+#    #+#             */
-/*   Updated: 2024/03/08 13:52:38 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/03/09 18:42:25 by ventouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,20 @@
 
 int main(int argc, char **argv)
 {
-	(void)argv;
+	char	*map_gnl;
+	char	**the_grid;
+	int		rc[2];
+
 	if (2 != argc)
 	{
 		printf("Error\nInput should looks like: ./so_long <map_path.ber>\n"); // wip - 
 		return (0);
 	}
-	if (0 == map_reading(argv[1]))
-		return (1);
+	if (map_reading(argv[1], &map_gnl, rc))
+	{
+		the_grid = build_matrix(map_gnl, rc);
+	}
+	printf("%s", map_gnl); // debug
+	printf("rows = [%d]\ncols = [%d]\n", rc[0], rc[1]); // debug
 	return (0);
 }
