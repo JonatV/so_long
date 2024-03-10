@@ -6,7 +6,7 @@
 /*   By: ventouse <ventouse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:48:42 by jveirman          #+#    #+#             */
-/*   Updated: 2024/03/09 23:10:05 by ventouse         ###   ########.fr       */
+/*   Updated: 2024/03/10 03:16:27 by ventouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,14 @@ typedef struct s_game
 void	ft_error_reading(int error_case, int fd, char *mem, char *buf);
 void	ft_error_reading_1(int error_case, char *mem);
 void	ft_error_map(int error_case, char *map_gnl, t_er_map *error_map);
+void	ft_error_map_1(int *rc, char *map_gnl, t_er_map *error_map, char **matrix);
+
+//----------- ERROR_UTILS
+int		is_char_valid(int c);
+void	free_matrix(int *rc, char **matrix);
 
 //----------- MAP
 int		map_reading(char *map_path, char **map_gnl, int *rc);
 void	build_matrix(char *map_gnl, int *rc, char ***the_grid);
-
-//----------- ERROR_UTILS
-int		is_char_valid(int c);
 
 #endif

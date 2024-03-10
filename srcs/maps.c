@@ -6,7 +6,7 @@
 /*   By: ventouse <ventouse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:58:44 by jveirman          #+#    #+#             */
-/*   Updated: 2024/03/09 23:11:14 by ventouse         ###   ########.fr       */
+/*   Updated: 2024/03/10 03:44:00 by ventouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,71 @@ static void	check_requisities(t_er_map *error_map, char *map_gnl)
 		ft_error_map(5, map_gnl, error_map);
 }
 
+static void	create_matrix(t_er_map *error_map, char *map_gnl, int *rc, char ***the_grid)
+{
+	int	i;
+	int	j;
+	int k;
+
+	*the_grid = (char **)malloc(sizeof(char *) * rc[0]);
+	if (*the_grid == NULL)
+		ft_error_map_1(rc, map_gnl, error_map, NULL); //wip
+	i = 0;
+	k = 0;
+	while (i < rc[0])
+	{
+
+		(*the_grid)[i] = (char *)malloc(rc[1] * sizeof(char));
+		if ((*the_grid)[i] == NULL)
+			ft_error_map_1(rc, map_gnl, error_map, *the_grid);
+		j = 0;
+		while (j < rc[1])
+			(*the_grid)[i][j++] = map_gnl[k++];
+		k++;
+		i++;
+	}
+}
+
+static void displayMatrix(int *rc, char **matrix) //debug function
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < rc[0])
+	{
+		j = 0;
+		while (j < rc[1])
+			printf("%c", matrix[i][j++]);
+		printf("\n");
+		i++;
+	}
+}
+
+static void	check_extremities(int rc[2], char **matrix)
+{
+	int i;
+
+	i = 0;
+	while (i < rc[1])
+	{
+		if (matrix[0][i] != '1' || matrix[rc[0] - 1][i] != '1')
+		{
+			printf("Top or bot error\n"); //wip - return 0 to free everything frimm build matric function
+		}
+		i++;
+	}
+	i = 0;
+	while (i < rc[0])
+	{
+		if (matrix[i][0] != '1' || matrix[i][rc[1] - 1] != '1')
+		{
+			printf("Left or right error\n");
+		}
+		i++;
+	}
+}
+
 void	build_matrix(char *map_gnl, int *rc, char ***the_grid)
 {
 	t_er_map	*error_map;
@@ -116,5 +181,8 @@ void	build_matrix(char *map_gnl, int *rc, char ***the_grid)
 	error_map->size = 0;
 	fill_requisities(error_map, map_gnl, rc);
 	check_requisities(error_map, map_gnl);
-	*the_grid = NULL;
+	create_matrix(error_map, map_gnl, rc, the_grid);
+	displayMatrix(rc, *the_grid);//debug
+	check_extremities(rc, *the_grid); // stopped here check the return here before freeing if return is 0
+	free(error_map);
 }

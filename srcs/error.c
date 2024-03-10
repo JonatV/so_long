@@ -6,7 +6,7 @@
 /*   By: ventouse <ventouse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:11:15 by jveirman          #+#    #+#             */
-/*   Updated: 2024/03/09 23:10:22 by ventouse         ###   ########.fr       */
+/*   Updated: 2024/03/10 03:18:31 by ventouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,14 @@ void ft_error_map(int error_case, char *map_gnl, t_er_map *error_map)
 	free(map_gnl);
 	free(error_map);
 	exit(EXIT_FAILURE);
+}
+
+void ft_error_map_1(int *rc, char *map_gnl, t_er_map *error_map, char **matrix)
+{
+	ft_putstr_fd("Error: Memory allocation failed for the matrix\n", 1);
+	if (matrix)
+		free_matrix(rc, matrix);
+	free(map_gnl);
+	free(error_map);
+	exit(EXIT_FAILURE);	
 }
