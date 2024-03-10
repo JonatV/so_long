@@ -6,7 +6,7 @@
 /*   By: ventouse <ventouse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:11:37 by jveirman          #+#    #+#             */
-/*   Updated: 2024/03/10 03:27:17 by ventouse         ###   ########.fr       */
+/*   Updated: 2024/03/10 17:10:18 by ventouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int main(int argc, char **argv)
 	{
 		build_matrix(map_gnl, rc, &the_grid);
 	}
+	printf("everything's fine\n");//debug
 	return (0);
 }

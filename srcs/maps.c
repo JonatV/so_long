@@ -6,7 +6,7 @@
 /*   By: ventouse <ventouse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:58:44 by jveirman          #+#    #+#             */
-/*   Updated: 2024/03/10 03:44:00 by ventouse         ###   ########.fr       */
+/*   Updated: 2024/03/10 17:07:37 by ventouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,44 +130,43 @@ static void	create_matrix(t_er_map *error_map, char *map_gnl, int *rc, char ***t
 	}
 }
 
-static void displayMatrix(int *rc, char **matrix) //debug function
+void displayMatrix(int rows, int cols, char **matrix) //debug function
 {
 	int i;
 	int j;
 
+	printf("\n");
 	i = 0;
-	while (i < rc[0])
+	while (i < rows)
 	{
 		j = 0;
-		while (j < rc[1])
+		while (j < cols)
 			printf("%c", matrix[i][j++]);
 		printf("\n");
 		i++;
 	}
 }
 
-static void	check_extremities(int rc[2], char **matrix)
+static int	check_extremities(int rc[2], char **matrix, int i, int t_b_l_r[4])
 {
-	int i;
-
-	i = 0;
 	while (i < rc[1])
 	{
-		if (matrix[0][i] != '1' || matrix[rc[0] - 1][i] != '1')
-		{
-			printf("Top or bot error\n"); //wip - return 0 to free everything frimm build matric function
-		}
+		if (matrix[0][i] != '1')
+			t_b_l_r[0]++;
+		if (matrix[rc[0] - 1][i] != '1')
+			t_b_l_r[1]++;
 		i++;
 	}
 	i = 0;
 	while (i < rc[0])
 	{
-		if (matrix[i][0] != '1' || matrix[i][rc[1] - 1] != '1')
-		{
-			printf("Left or right error\n");
-		}
+		if (matrix[i][0] != '1')
+			t_b_l_r[2]++;
+		if (matrix[i][rc[1] - 1] != '1')
+			t_b_l_r[3]++;
 		i++;
 	}
+	return (ft_error_map_2(t_b_l_r));
 }
 
 void	build_matrix(char *map_gnl, int *rc, char ***the_grid)
@@ -179,10 +178,19 @@ void	build_matrix(char *map_gnl, int *rc, char ***the_grid)
 	error_map->exit = 0;
 	error_map->start = 0;
 	error_map->size = 0;
+	error_map->rc[0] = rc[0];
+	error_map->rc[1] = rc[1];
 	fill_requisities(error_map, map_gnl, rc);
 	check_requisities(error_map, map_gnl);
 	create_matrix(error_map, map_gnl, rc, the_grid);
-	displayMatrix(rc, *the_grid);//debug
-	check_extremities(rc, *the_grid); // stopped here check the return here before freeing if return is 0
+	displayMatrix(rc[0], rc[1], *the_grid);//debug
+	if (!check_extremities(rc, *the_grid, 0, (int[]){0, 0, 0, 0}))
+	{
+		free_matrix(rc[0], *the_grid);
+		free(map_gnl);
+		free(error_map);
+		exit(EXIT_FAILURE);
+	}
+	pathfinder(rc, the_grid, error_map);
 	free(error_map);
 }

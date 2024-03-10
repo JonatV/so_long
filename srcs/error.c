@@ -6,7 +6,7 @@
 /*   By: ventouse <ventouse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:11:15 by jveirman          #+#    #+#             */
-/*   Updated: 2024/03/10 03:18:31 by ventouse         ###   ########.fr       */
+/*   Updated: 2024/03/10 17:08:44 by ventouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,31 @@ void ft_error_map_1(int *rc, char *map_gnl, t_er_map *error_map, char **matrix)
 {
 	ft_putstr_fd("Error: Memory allocation failed for the matrix\n", 1);
 	if (matrix)
-		free_matrix(rc, matrix);
+		free_matrix(rc[0], matrix);
 	free(map_gnl);
 	free(error_map);
 	exit(EXIT_FAILURE);	
+}
+
+int	ft_error_map_2(int t_b_l_r[4])
+{
+	int	ret;
+
+	ret = 1;
+	if (t_b_l_r[0] > 0 || t_b_l_r[1] > 0 || t_b_l_r[2] > 0 || t_b_l_r[3] > 0)
+		ret = 0;
+	if (t_b_l_r[0] > 0 && t_b_l_r[1] > 0 && t_b_l_r[2] > 0 && t_b_l_r[3] > 0)
+	{
+		ft_putstr_fd("Error: Please make and effort, holes everywhere...\n", 1);
+		return (ret);
+	}
+	if (t_b_l_r[0] > 0)
+		ft_putstr_fd("Error: Top wall is not that solid.\n", 1);
+	if (t_b_l_r[1] > 0)
+		ft_putstr_fd("Error: Bottom wall must be made of 1's.\n", 1);
+	if (t_b_l_r[2] > 0)
+		ft_putstr_fd("Error: Left wall must be made of 1's.\n", 1);
+	if (t_b_l_r[3] > 0)
+		ft_putstr_fd("Error: Right wall must be made of 1's.\n", 1);
+	return (ret);
 }

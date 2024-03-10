@@ -12,8 +12,10 @@ ARCH_FLAGS	=	ar -rcs
 
 SRC			=	$(SRCDIR)so_long.c	\
 				$(SRCDIR)maps.c		\
+				$(SRCDIR)maps_utils.c \
 				$(SRCDIR)error.c	\
-				$(SRCDIR)error_utils.c	\
+				$(SRCDIR)error_pathfinder.c	\
+				$(SRCDIR)error_utils.c
 
 OBJ			=	$(SRC:.c=.o)
 
