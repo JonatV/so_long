@@ -6,7 +6,7 @@
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:04:34 by jveirman          #+#    #+#             */
-/*   Updated: 2024/03/12 13:25:06 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:32:13 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_error_matrix(int error_case, char *map_gnl, t_er_map *error_map)
 {
 	if (1 == error_case)
-		ft_putstr_fd("Error: The map must be rectangle.\n", 1);
+		ft_putstr_fd("Error: The map must be a rectangle.\n", 1);
 	else if (2 == error_case)
 		ft_putstr_fd("Error: Map too small.\n", 1);
 	else if (3 == error_case)
@@ -49,7 +49,7 @@ int	ft_error_matrix_2(int t_b_l_r[4])
 		ret = 0;
 	if (t_b_l_r[0] > 0 && t_b_l_r[1] > 0 && t_b_l_r[2] > 0 && t_b_l_r[3] > 0)
 	{
-		ft_putstr_fd("Error: Please make and effort, holes everywhere...\n", 1);
+		ft_putstr_fd("Error: Please make an effort, holes everywhere...\n", 1);
 		return (ret);
 	}
 	if (t_b_l_r[0] > 0)

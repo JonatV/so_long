@@ -6,7 +6,7 @@
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:39:27 by jveirman          #+#    #+#             */
-/*   Updated: 2024/03/12 14:08:52 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:34:07 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	is_file_valid(char *str)
 {
-	if (ft_strncmp(".ber", str + ft_strlen(str) - 4, 4) == 0)
+	if (ft_strlen(str) >= 4 && 
+		ft_strncmp(".ber", str + ft_strlen(str) - 4, 4) == 0)
 		return (1);
 	ft_putstr_fd("Error: File extension must be .ber\n", 1);
 	exit(EXIT_FAILURE);

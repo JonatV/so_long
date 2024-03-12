@@ -6,13 +6,13 @@
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:11:15 by jveirman          #+#    #+#             */
-/*   Updated: 2024/03/12 13:23:29 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:37:28 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	ft_error_maps(int error_case, int fd, char *mem, char *buf)
+void	ft_error_maps(int error_case, int fd, char *mem)
 {
 	if (1 == error_case)
 		ft_putstr_fd("Error: File descriptor\n", 1);
@@ -26,8 +26,6 @@ void	ft_error_maps(int error_case, int fd, char *mem, char *buf)
 		ft_putstr_fd("Error: Ft_strjoin failed\n", 1);
 		if (mem)
 			free(mem);
-		if (buf)
-			free(buf);
 		close (fd);
 	}
 	exit(EXIT_FAILURE);

@@ -6,7 +6,7 @@
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:58:44 by jveirman          #+#    #+#             */
-/*   Updated: 2024/03/12 13:26:25 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:38:55 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,25 @@ int	map_reading(char *map_path, char **map_gnl, int *rc)
 {
 	int		fd;
 	int		nbr_bytes;
-	char	*buf;
+	char	buf[2];
 	char	*temp;
 
 	temp = "";
 	*map_gnl = "";
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
-		ft_error_maps(1, fd, NULL, NULL);
-	buf = (char *)malloc(sizeof(char));
-	if (!buf)
-		ft_error_maps(2, fd, NULL, NULL);
+		ft_error_maps(1, fd, NULL);
+	buf[0] = '\0';
+	buf[1] = '\0';
 	nbr_bytes = read(fd, buf, 1);
 	while (nbr_bytes > 0)
 	{
 		temp = ft_strjoin(temp, buf);
 		if (!temp)
-			ft_error_maps(3, fd, *map_gnl, buf);
+			ft_error_maps(3, fd, *map_gnl);
 		*map_gnl = temp;
 		nbr_bytes = read(fd, buf, 1);
 	}
-	free(buf);
 	close(fd);
 	return (check_set_data(*map_gnl, 0, rc, 0));
 }

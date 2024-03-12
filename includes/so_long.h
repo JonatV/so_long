@@ -6,17 +6,18 @@
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:48:42 by jveirman          #+#    #+#             */
-/*   Updated: 2024/03/12 14:12:22 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:22:50 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "../libft/libft.h" //debug
+# include "../libft/libft.h"
+# include "mlx.h"
 # include <stdio.h> //debug
-# include <stdlib.h> //debug
-# include <unistd.h> //debug
+# include <stdlib.h>
+# include <unistd.h>
 # include <fcntl.h> //debug
 
 typedef struct s_error_map
@@ -43,7 +44,7 @@ typedef struct s_game
 void	display_matrix(int rows, int cols, char **matrix, int is_before); //debug function
 
 //----------- ERROR_MAPS
-void	ft_error_maps(int error_case, int fd, char *mem, char *buf);
+void	ft_error_maps(int error_case, int fd, char *mem);
 void	ft_error_maps_1(int error_case, char *mem);
 
 //----------- ERROR_MATRIX
