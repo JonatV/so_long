@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   maps_utils.c                                       :+:      :+:    :+:   */
+/*   pathfinder.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ventouse <ventouse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 14:09:55 by ventouse          #+#    #+#             */
-/*   Updated: 2024/03/10 17:11:38 by ventouse         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:30:37 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static char	**ft_copy_matrix(int rows, int cols, char **matrix)
 {
-	int	i;
-	int	j;
-	char **copy;
+	int		i;
+	int		j;
+	char	**copy;
 
 	copy = malloc(sizeof(char *) * rows);
 	if (!copy)
@@ -41,11 +41,11 @@ static char	**ft_copy_matrix(int rows, int cols, char **matrix)
 	return (copy);
 }
 
-static void find_pos_index(int *rc, char **matrix, int *start_x, int *start_y)
+static void	find_pos_index(int *rc, char **matrix, int *start_x, int *start_y)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	while (i < rc[0])
 	{
@@ -58,7 +58,7 @@ static void find_pos_index(int *rc, char **matrix, int *start_x, int *start_y)
 				*start_y = j;
 				return ;
 			}
-			j++;	
+			j++;
 		}
 		i++;
 	}
@@ -79,40 +79,31 @@ static void	algo_floodfill(char **matrix, int x, int y, t_algo_res *algo_res)
 	algo_floodfill(matrix, x, y - 1, algo_res);
 }
 
-void	pathfinder(int *rc, char ***matrix, t_er_map *error_map)
+void	pathfinder(int *rc, char ***matrix, t_er_map *er_map)
 {
-	char**	matrix_copy;
-	int		start_x;
-	int		start_y;
-	t_algo_res *algo_res;
+	char		**matrix_copy;
+	int			start_x;
+	int			start_y;
+	t_algo_res	*algo_res;
 
 	algo_res = malloc(sizeof(t_algo_res));
 	if (!algo_res)
-		ft_error_pathfinder(1, *matrix, error_map, NULL);
+		ft_error_pathfinder(1, *matrix, er_map, NULL);
 	algo_res->collect = 0;
 	algo_res->exit = 0;
 	matrix_copy = ft_copy_matrix(rc[0], rc[1], *matrix);
 	if (!matrix_copy)
 	{
 		free(algo_res);
-		ft_error_pathfinder(2, *matrix, error_map, NULL);
+		ft_error_pathfinder(2, *matrix, er_map, NULL);
 	}
 	find_pos_index(rc, matrix_copy, &start_x, &start_y);
 	algo_floodfill(matrix_copy, start_x, start_y, algo_res);
-	displayMatrix(rc[0], rc[1], matrix_copy);//debug
-	if (error_map->collect != algo_res->collect || error_map->exit != algo_res->exit)
+	if (er_map->collect != algo_res->collect || er_map->exit != algo_res->exit)
 	{
 		free(algo_res);
-		ft_error_pathfinder(3, *matrix, error_map, matrix_copy);
+		ft_error_pathfinder(3, *matrix, er_map, matrix_copy);
 	}
 	free(algo_res);
-	ft_error_pathfinder(4, *matrix, error_map, matrix_copy);
+	ft_error_pathfinder(4, *matrix, er_map, matrix_copy);
 }
-/*
-things i need to free in case the pathfinder found any error
-- algo_res structure
-- matrix copy 2d array and its pointer (handled inside the copy function)
-- char ***matrix
-- t_er_map *error map;
-
-*/

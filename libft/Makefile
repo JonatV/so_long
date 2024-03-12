@@ -34,7 +34,7 @@ all 	:	${NAME}
 
 ${NAME} :	${OBJS}
 			@${AR}	${NAME} ${OBJS}
-			# @$(MAKE) loading
+# @$(MAKE) loading
 
 
 clean 	:

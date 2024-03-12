@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   error_pathfinder.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ventouse <ventouse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:29:40 by ventouse          #+#    #+#             */
-/*   Updated: 2024/03/10 17:09:35 by ventouse         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:31:38 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void ft_error_pathfinder(int error_case, char **matrix, t_er_map *error_map, char **matrix_copy)
+void	ft_error_pathfinder(int error_case, char **matrix, 
+		t_er_map *error_map, char **matrix_copy)
 {
+	display_matrix(error_map->rc[0], error_map->rc[1], matrix_copy, 0);
 	if (1 == error_case)
 		ft_putstr_fd("Error: Malloc error in pathfinder.\n", 1);
 	else if (2 == error_case)
