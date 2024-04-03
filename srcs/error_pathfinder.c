@@ -6,7 +6,7 @@
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 16:29:40 by ventouse          #+#    #+#             */
-/*   Updated: 2024/03/12 13:31:38 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/04/03 11:34:45 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ void	ft_error_pathfinder(int error_case, char **matrix,
 		free_matrix(error_map->rc[0], matrix_copy);
 	if (4 == error_case)
 		return ;
-	free_matrix(error_map->rc[0], matrix);
-	free(error_map);
+	if (matrix)
+		free_matrix(error_map->rc[0], matrix);
+	if (error_map)
+		free(error_map);
 	exit(EXIT_FAILURE);
 }

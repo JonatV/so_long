@@ -6,13 +6,13 @@
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:11:37 by jveirman          #+#    #+#             */
-/*   Updated: 2024/03/12 16:24:22 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/04/03 12:07:50 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	display_matrix(int rows, int cols, char **matrix, int is_before)
+void	display_matrix(int rows, int cols, char **matrix, int is_before) // debug function
 {
 	int	i;
 	int	j;
@@ -35,10 +35,11 @@ void	display_matrix(int rows, int cols, char **matrix, int is_before)
 
 int	main(int argc, char **argv)
 {
-	char	*map_gnl;
+	char	*map_gnl; // map gnl is freed in the build matrix
 	char	**the_grid;
 	int		rc[2];
 
+	map_gnl = NULL;
 	if (2 != argc)
 	{
 		ft_putstr_fd("Error: Input should looks like: ", 1);

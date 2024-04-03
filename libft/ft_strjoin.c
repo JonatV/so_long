@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jveirman <jveirman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:37:55 by jveirman          #+#    #+#             */
-/*   Updated: 2024/02/27 14:58:37 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/04/03 07:36:23 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static size_t	length_check(const char *the_string)
+{
+	if (the_string)
+		return (ft_strlen(the_string));
+	return (0);
+}
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -20,10 +27,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	i;
 	size_t	j;
 
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (NULL);
-	size_s1 = ft_strlen(s1);
-	size_s2 = ft_strlen(s2);
+	size_s1 = length_check(s1);
+	size_s2 = length_check(s2);
 	the_mem = (char *)malloc(sizeof(char) * (size_s1 + size_s2) + 1);
 	if (the_mem == NULL)
 		return (NULL);

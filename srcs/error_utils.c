@@ -6,7 +6,7 @@
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:39:27 by jveirman          #+#    #+#             */
-/*   Updated: 2024/03/12 15:34:07 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/04/03 06:51:20 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void	free_matrix(int rows, char **matrix)
 		free(matrix[i]);
 		i++;
 	}
-	free(matrix);
+	if (matrix)
+		free(matrix);
 }

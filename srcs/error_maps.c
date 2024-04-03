@@ -6,7 +6,7 @@
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:11:15 by jveirman          #+#    #+#             */
-/*   Updated: 2024/03/12 15:37:28 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/04/03 06:54:04 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ void	ft_error_maps_1(int error_case, char *mem)
 	if (1 == error_case)
 	{
 		ft_putstr_fd("Error: Wrong character found.\n", 1);
-		free(mem);
+		if (mem)
+			free(mem);
 	}
 	else if (2 == error_case)
 	{
 		ft_putstr_fd("Error: Rows have different lengths.\n", 1);
-		free(mem);
+		if (mem)
+			free(mem);
 	}
 	exit(EXIT_FAILURE);
 }

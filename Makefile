@@ -6,7 +6,7 @@ INCLUDE		=	-I./includes/so_long.h
 
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror
-MLX_FLAGS	=	-lmlx -framework OpenGL -framework AppKit
+# MLX_FLAGS	=	-lmlx -framework OpenGL -framework AppKit
 RM			=	rm -rf
 ARCH_FLAGS	=	ar -rcs
 
@@ -27,7 +27,8 @@ $(LIBFT):
 				make -C ./libft
 
 $(NAME):		$(LIBFT) $(OBJ)
-				$(CC) $(CFLAGS) $(OBJ) $(INCLUDE) $(MLX_FLAGS) $(LIBFT) -o $@ 
+# $(CC) $(CFLAGS) $(OBJ) $(INCLUDE) $(MLX_FLAGS) $(LIBFT) -o $@ 
+				$(CC) -fsanitize=address -g $(CFLAGS) $(OBJ) $(INCLUDE) $(MLX_FLAGS) $(LIBFT) -o $@ 
 
 %.o:			%.c
 				$(CC) $(CFLAGS) -c $^ -o $@

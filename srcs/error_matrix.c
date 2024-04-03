@@ -6,7 +6,7 @@
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:04:34 by jveirman          #+#    #+#             */
-/*   Updated: 2024/03/12 15:32:13 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/04/03 06:52:16 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ void	ft_error_matrix(int error_case, char *map_gnl, t_er_map *error_map)
 		ft_putstr_fd("Error: Multiple or no START found.\n", 1);
 	else if (5 == error_case)
 		ft_putstr_fd("Error: Multiple or no EXIT found.\n", 1);
-	free(map_gnl);
-	free(error_map);
+	if (map_gnl)
+		free(map_gnl);
+	if (error_map)
+		free(error_map);
 	exit(EXIT_FAILURE);
 }
 
@@ -35,8 +37,10 @@ void	ft_error_matrix_1(int *rc, char *map_gnl,
 	ft_putstr_fd("Error: Memory allocation failed for the matrix\n", 1);
 	if (matrix)
 		free_matrix(rc[0], matrix);
-	free(map_gnl);
-	free(error_map);
+	if (map_gnl)
+		free(map_gnl);
+	if (error_map)
+		free(error_map);
 	exit(EXIT_FAILURE);
 }
 

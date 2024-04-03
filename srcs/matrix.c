@@ -6,7 +6,7 @@
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:00:25 by jveirman          #+#    #+#             */
-/*   Updated: 2024/03/12 13:31:59 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/04/03 11:45:09 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	fill_requisites(t_er_map *error_map, char *map_gnl, int *rc)
 	i = 0;
 	while (map_gnl[i])
 	{
+		// printf("filling requisities\n"); // debug
 		if (map_gnl[i] == 'P')
 			error_map->start++;
 		if (map_gnl[i] == 'E')
@@ -110,7 +111,8 @@ void	build_matrix(char *map_gnl, int *rc, char ***the_grid)
 	fill_requisites(error_map, map_gnl, rc);
 	check_requisites(error_map, map_gnl);
 	create_matrix(error_map, map_gnl, rc, the_grid);
-	display_matrix(rc[0], rc[1], *the_grid, 1);
+	free(map_gnl); // info - not needed anymore
+	display_matrix(rc[0], rc[1], *the_grid, 1); // debug
 	if (!check_extremities(rc, *the_grid, 0, (int []){0, 0, 0, 0}))
 	{
 		free_matrix(rc[0], *the_grid);
@@ -120,4 +122,5 @@ void	build_matrix(char *map_gnl, int *rc, char ***the_grid)
 	}
 	pathfinder(rc, the_grid, error_map);
 	free(error_map);
+	free_matrix(rc[0], *the_grid); // debug - will be needed for the main to transfer to the mlx system
 }
