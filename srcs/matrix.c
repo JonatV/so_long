@@ -6,7 +6,7 @@
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:00:25 by jveirman          #+#    #+#             */
-/*   Updated: 2024/04/03 11:45:09 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:41:39 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void	fill_requisites(t_er_map *error_map, char *map_gnl, int *rc)
 	i = 0;
 	while (map_gnl[i])
 	{
-		// printf("filling requisities\n"); // debug
 		if (map_gnl[i] == 'P')
 			error_map->start++;
 		if (map_gnl[i] == 'E')
@@ -57,7 +56,7 @@ static void	create_matrix(t_er_map *error_map, char *map_gnl,
 	int	j;
 	int	k;
 
-	*the_grid = (char **)malloc(sizeof(char *) * rc[0]);
+	*the_grid = (char **)malloc(sizeof(char *) * rc[0] + 1);
 	if (*the_grid == NULL)
 		ft_error_matrix_1(rc, map_gnl, error_map, NULL);
 	i = 0;
@@ -70,9 +69,11 @@ static void	create_matrix(t_er_map *error_map, char *map_gnl,
 		j = 0;
 		while (j < rc[1])
 			(*the_grid)[i][j++] = map_gnl[k++];
+		(*the_grid)[i][j] = '\0';
 		k++;
 		i++;
 	}
+	(*the_grid)[i] = NULL;
 }
 
 static int	check_extremities(int rc[2], char **matrix, int i, int t_b_l_r[4])
@@ -122,5 +123,4 @@ void	build_matrix(char *map_gnl, int *rc, char ***the_grid)
 	}
 	pathfinder(rc, the_grid, error_map);
 	free(error_map);
-	free_matrix(rc[0], *the_grid); // debug - will be needed for the main to transfer to the mlx system
 }

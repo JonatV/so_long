@@ -6,7 +6,7 @@
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:11:37 by jveirman          #+#    #+#             */
-/*   Updated: 2024/04/03 12:07:50 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:41:55 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,21 @@ void	display_matrix(int rows, int cols, char **matrix, int is_before) // debug f
 	}
 }
 
+void	game_to_display(t_game *game)
+{
+	if (!set_textures_addr(game))
+		exit(1); // wip - handle error here
+	display_window(game);
+}
+
 int	main(int argc, char **argv)
 {
 	char	*map_gnl; // map gnl is freed in the build matrix
 	char	**the_grid;
 	int		rc[2];
+	t_game	game;
 
+	the_grid = NULL;
 	map_gnl = NULL;
 	if (2 != argc)
 	{
@@ -48,5 +57,8 @@ int	main(int argc, char **argv)
 	}
 	if (is_file_valid(argv[1]) && map_reading(argv[1], &map_gnl, rc))
 		build_matrix(map_gnl, rc, &the_grid);
+	init_structs(&game, the_grid);
+	game_to_display(&game);
+	mlx_loop(game.mlx.mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:48:42 by jveirman          #+#    #+#             */
-/*   Updated: 2024/03/12 16:22:50 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/04/03 13:36:20 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,56 @@
 # include <stdio.h> //debug
 # include <stdlib.h>
 # include <unistd.h>
-# include <fcntl.h> //debug
+# include <fcntl.h>
+# include <string.h> // debug
+
+# define SPRITE_SIZE 64
+
+# define U	13
+# define D	1
+# define L	0
+# define R	2
+
+# define A_U	126
+# define A_D	125
+# define A_L	123
+# define A_R	124
+
+# define EXIT	53
+
+typedef struct s_pos
+{
+	int		x;
+	int		y;
+}	t_pos;
+
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*mlx_win;
+	void	*sprite_ground;
+	void	*sprite_wall;
+	void	*sprite_collect;
+	void	*sprite_exit;
+	void	*sprite_exit_no;
+	void	*sprite_win;
+	void	*sprite_player;
+	void	*sprite_player_exit;
+	void	*bg;
+	int	size;
+}	t_mlx;
+
+typedef struct s_game
+{
+	t_mlx	mlx;
+	char	**map;
+	int		rows;
+	int		cols;
+	int		collect;
+	int		inventory;
+	int		moves;
+	t_pos	player_pos;
+}	t_game;
 
 typedef struct s_error_map
 {
@@ -35,10 +84,20 @@ typedef struct s_algo_result
 	int		collect;
 }	t_algo_res;
 
-typedef struct s_game
-{
-	int		collect;
-}	t_game;
+void	display_window(t_game *game);
+void	game_to_display(t_game *game);
+
+// ----------- HOOKS
+int	key_listener(int key, t_game *game);
+int	quit(t_game *game);
+// ----------- STRUCT
+void	init_structs(t_game *game, char **map);
+
+// ----------- MOUVEMENT
+void	move_player(t_game *game, int key);
+
+// ----------- TEXTURES
+int		set_textures_addr(t_game *game);
 
 //----------- DEBUG FUNTIONS
 void	display_matrix(int rows, int cols, char **matrix, int is_before); //debug function
