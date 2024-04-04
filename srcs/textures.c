@@ -45,6 +45,7 @@ void	display_window(t_game *game, int x, int y)
 
 	while (game->map[++y])
 	{
+		x = -1;
 		while (game->map[y][++x])
 		{
 			if (game->map[y][x] == '1')
