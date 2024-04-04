@@ -6,7 +6,7 @@
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:58:44 by jveirman          #+#    #+#             */
-/*   Updated: 2024/04/03 14:40:27 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/04/04 10:29:28 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ int	map_reading(char *map_path, char **map_gnl, int *rc)
 	int		fd;
 	int		nbr_bytes;
 	char	buf[2];
-	char	*temp = NULL;
+	char	*temp;
 	char	*old_temp;
 
+	temp = NULL;
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
 		ft_error_maps(1, fd, NULL);

@@ -6,7 +6,7 @@
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:04:34 by jveirman          #+#    #+#             */
-/*   Updated: 2024/04/03 12:19:27 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/04/04 10:27:53 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_error_matrix(int error_case, char *map_gnl, t_er_map *error_map)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_error_matrix_1(int *rc, char *map_gnl, 
+void	ft_error_matrix_1(int *rc, char *map_gnl,
 		t_er_map *error_map, char **matrix)
 {
 	ft_putstr_fd("Error: Memory allocation failed for the matrix\n", 1);

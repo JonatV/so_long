@@ -6,7 +6,7 @@
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:00:25 by jveirman          #+#    #+#             */
-/*   Updated: 2024/04/03 14:41:39 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/04/04 10:29:58 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	check_requisites(t_er_map *error_map, char *map_gnl)
 		ft_error_matrix(5, map_gnl, error_map);
 }
 
-static void	create_matrix(t_er_map *error_map, char *map_gnl, 
+static void	create_matrix(t_er_map *error_map, char *map_gnl,
 			int *rc, char ***the_grid)
 {
 	int	i;
@@ -112,8 +112,7 @@ void	build_matrix(char *map_gnl, int *rc, char ***the_grid)
 	fill_requisites(error_map, map_gnl, rc);
 	check_requisites(error_map, map_gnl);
 	create_matrix(error_map, map_gnl, rc, the_grid);
-	free(map_gnl); // info - not needed anymore
-	display_matrix(rc[0], rc[1], *the_grid, 1); // debug
+	free(map_gnl);
 	if (!check_extremities(rc, *the_grid, 0, (int []){0, 0, 0, 0}))
 	{
 		free_matrix(rc[0], *the_grid);

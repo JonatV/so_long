@@ -15,9 +15,10 @@
 void	set_mlx_struct(t_game *game)
 {
 	game->mlx.mlx = mlx_init();
-	game->mlx.mlx_win = mlx_new_window(game->mlx.mlx, game->cols * SPRITE_SIZE, game->rows * SPRITE_SIZE, "so_long");
-	mlx_hook(game->mlx.mlx_win, 17, 0, &quit, game); // info - 17 = ondestroy (0 cause no mask needed)
-	mlx_hook(game->mlx.mlx_win, 2, 1L << 0, key_listener, game); // info - 2 = key press (1L<<0 its KeyPressMask)
+	game->mlx.mlx_win = mlx_new_window(game->mlx.mlx, \
+	game->cols * SPRITE_SIZE, game->rows * SPRITE_SIZE, "so_long");
+	mlx_hook(game->mlx.mlx_win, 17, 0, &quit, game);
+	mlx_hook(game->mlx.mlx_win, 2, 1L << 0, key_listener, game);
 }
 
 void	set_game_struct(t_game *game)

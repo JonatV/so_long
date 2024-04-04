@@ -2,6 +2,7 @@ NAME		=	so_long
 
 SRCDIR		=	srcs/
 LIBFT		=	./libft/libft.a
+PRINTF		=	./ft_printf/libftprintf.a
 INCLUDE		=	-I./includes/so_long.h
 
 CC			=	gcc
@@ -27,12 +28,15 @@ OBJ			=	$(SRC:.c=.o)
 
 all:			$(NAME)
 
-$(LIBFT):
+$(LIBFT):		
 				make -C ./libft
 
-$(NAME):		$(LIBFT) $(OBJ)
-				$(CC) $(CFLAGS) $(OBJ) $(INCLUDE) $(MLX_FLAGS) $(LIBFT) -o $@ 
-# $(CC) -fsanitize=address -g $(CFLAGS) $(OBJ) $(INCLUDE) $(MLX_FLAGS) $(LIBFT) -o $@ 
+$(PRINTF):		
+				make -C ./ft_printf
+				
+
+$(NAME):		$(LIBFT) $(PRINTF) $(OBJ)
+				$(CC) $(CFLAGS) $(OBJ) $(INCLUDE) $(MLX_FLAGS) $(LIBFT) $(PRINTF) -o $@
 
 %.o:			%.c
 				$(CC) $(CFLAGS) -c $^ -o $@
@@ -40,10 +44,12 @@ $(NAME):		$(LIBFT) $(OBJ)
 clean :			
 				$(RM) $(OBJ)
 				make clean -C ./libft
+				make clean -C ./ft_printf
 
 fclean :		clean
 				$(RM) $(NAME)
 				$(RM) $(LIBFT)
+				$(RM) $(PRINTF)
 
 re :			fclean all
 
