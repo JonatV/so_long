@@ -4,4 +4,8 @@ token.private
 *.o
 *.a
 *.swp
+*.json
 so_long
+old_texture_xpm
+placeholder_xpm
+png

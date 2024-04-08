@@ -6,7 +6,7 @@
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:11:15 by jveirman          #+#    #+#             */
-/*   Updated: 2024/04/03 12:19:14 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:56:13 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 void	ft_error_maps(int error_case, int fd, char *mem)
 {
 	if (1 == error_case)
-		ft_putstr_fd("Error: File descriptor\n", 1);
+		ft_putstr_fd("Error\nFile descriptor\n", 1);
 	else if (2 == error_case)
 	{
-		ft_putstr_fd("Error: Malloc failed\n", 1);
+		ft_putstr_fd("Error\nMalloc failed\n", 1);
 		close (fd);
 	}
 	else if (3 == error_case)
 	{
-		ft_putstr_fd("Error: Ft_strjoin failed\n", 1);
+		ft_putstr_fd("Error\nFt_strjoin failed\n", 1);
 		if (mem)
 			free(mem);
 		close (fd);
@@ -35,13 +35,13 @@ void	ft_error_maps_1(int error_case, char *mem)
 {
 	if (1 == error_case)
 	{
-		ft_putstr_fd("Error: Wrong character found.\n", 1);
+		ft_putstr_fd("Error\nWrong character found.\n", 1);
 		if (mem)
 			free(mem);
 	}
 	else if (2 == error_case)
 	{
-		ft_putstr_fd("Error: Rows have different lengths.\n", 1);
+		ft_putstr_fd("Error\nRows have different lengths.\n", 1);
 		if (mem)
 			free(mem);
 	}

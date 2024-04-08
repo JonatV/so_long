@@ -12,19 +12,7 @@
 
 #include "../includes/so_long.h"
 
-void	moves_update(t_game *game)
-{
-	game->moves++;
-	ft_printf("Moves : [%d]\n", game->moves);
-}
-
-void	update_game_state(t_game *game, int x, int y)
-{
-	if (game->map[y][x] == 'X')
-		ft_printf("You Win!\nWith [%d] moves", game->moves);
-}
-
-int	is_move_valid(t_game *game, int next_x, int next_y)
+static int	is_move_valid(t_game *game, int next_x, int next_y)
 {
 	if (game->map[next_y][next_x] == '1')
 		return (0);
@@ -68,7 +56,9 @@ void	move_player(t_game *game, int key)
 	if (!is_move_valid(game, game->player_pos.x + next_x, \
 	game->player_pos.y + next_y))
 		return ;
-	moves_update(game);
+	game->moves++;
+	ft_printf("Moves : [%d]\n", game->moves);
 	display_window(game, -1, -1);
-	update_game_state(game, game->player_pos.x, game->player_pos.y);
+	if (game->map[game->player_pos.y][game->player_pos.x] == 'X')
+		ft_printf("You Win!\nWith [%d] moves", game->moves);
 }

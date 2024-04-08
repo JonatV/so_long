@@ -12,7 +12,7 @@
 
 #include "../includes/so_long.h"
 
-void	set_mlx_struct(t_game *game)
+static void	set_mlx_struct(t_game *game)
 {
 	game->mlx.mlx = mlx_init();
 	game->mlx.mlx_win = mlx_new_window(game->mlx.mlx, \
@@ -21,7 +21,7 @@ void	set_mlx_struct(t_game *game)
 	mlx_hook(game->mlx.mlx_win, 2, 1L << 0, key_listener, game);
 }
 
-void	set_game_struct(t_game *game)
+static void	set_game_struct(t_game *game)
 {
 	int	y;
 	int	x;
@@ -54,7 +54,15 @@ void	init_structs(t_game *game, char **map)
 	game->inventory = 0;
 	game->moves = 0;
 	game->mlx.sprite_ground = 0;
-	game->mlx.sprite_wall = 0;
+	game->mlx.sprite_block = 0;
+	game->mlx.sprite_w_tl = 0;
+	game->mlx.sprite_w_tr = 0;
+	game->mlx.sprite_w_bl = 0;
+	game->mlx.sprite_w_br = 0;
+	game->mlx.sprite_w_t = 0;
+	game->mlx.sprite_w_b = 0;
+	game->mlx.sprite_w_l = 0;
+	game->mlx.sprite_w_r = 0;
 	game->mlx.sprite_collect = 0;
 	game->mlx.sprite_exit = 0;
 	game->mlx.sprite_exit_no = 0;
@@ -62,7 +70,6 @@ void	init_structs(t_game *game, char **map)
 	game->mlx.sprite_player = 0;
 	game->mlx.sprite_player_exit = 0;
 	game->mlx.size = SPRITE_SIZE;
-	game->mlx.bg = 0;
 	set_game_struct(game);
 	set_mlx_struct(game);
 }

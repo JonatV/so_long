@@ -6,13 +6,13 @@
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:11:37 by jveirman          #+#    #+#             */
-/*   Updated: 2024/04/04 11:06:10 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:23:28 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	game_to_display(t_game *game)
+static void	game_to_display(t_game *game)
 {
 	if (!set_textures_addr(game))
 		quit(game, EXIT_FAILURE);
@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 	map_gnl = NULL;
 	if (2 != argc)
 	{
-		ft_putstr_fd("Error: Input should looks like: ", 1);
+		ft_putstr_fd("Error\nInput should looks like: ", 1);
 		ft_putstr_fd("./so_long <map_path.ber>\n", 1);
 		return (0);
 	}

@@ -6,7 +6,7 @@
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:48:42 by jveirman          #+#    #+#             */
-/*   Updated: 2024/04/04 11:06:15 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:25:16 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,21 @@ typedef struct s_mlx
 	void	*mlx;
 	void	*mlx_win;
 	void	*sprite_ground;
-	void	*sprite_wall;
+	void	*sprite_block;
+	void	*sprite_w_tl;
+	void	*sprite_w_tr;
+	void	*sprite_w_bl;
+	void	*sprite_w_br;
+	void	*sprite_w_t;
+	void	*sprite_w_b;
+	void	*sprite_w_l;
+	void	*sprite_w_r;
 	void	*sprite_collect;
 	void	*sprite_exit;
 	void	*sprite_exit_no;
 	void	*sprite_win;
 	void	*sprite_player;
 	void	*sprite_player_exit;
-	void	*bg;
 	int		size;
 }	t_mlx;
 
@@ -83,9 +90,6 @@ typedef struct s_algo_result
 	int		collect;
 }	t_algo_res;
 
-void	display_window(t_game *game, int x, int y);
-void	game_to_display(t_game *game);
-
 // ----------- HOOKS
 int		key_listener(int key, t_game *game);
 int		quit(t_game *game, int value);
@@ -97,6 +101,7 @@ void	init_structs(t_game *game, char **map);
 void	move_player(t_game *game, int key);
 
 // ----------- TEXTURES
+void	display_window(t_game *game, int x, int y);
 int		set_textures_addr(t_game *game);
 
 //----------- ERROR_MAPS
